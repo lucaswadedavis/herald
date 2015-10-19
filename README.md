@@ -1,4 +1,3 @@
-Iconic
-============
+# Herald
 
-Iconic is a little tool for generating (infinite?) icons by using the HTML5 canvas element.
+Herald is a little tool for generating (infinite?) icons by using the HTML5 canvas element.

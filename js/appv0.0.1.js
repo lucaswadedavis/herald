@@ -14,7 +14,7 @@ var app={m:{},v:{},c:{}};
 
 app.c.init=function(){
 	app.m.password=false;
-	app.m.metadata={"name":"Iconic","version":"0.0.2"};
+	app.m.metadata={"name":"Herald","version":"0.0.2"};
 	var b=app.c.bounds();
 	app.m.genome={};
 	app.m.genome.r=[];
@@ -75,7 +75,7 @@ app.v.init=function(){
 	app.v.style();
 	var b=app.m.bounds;
 	var d="";
-	d+="<input type='text' value='Iconic'>";
+  d+="<h1>Herald</h1>";
 	d+="<div id='radios'><form actio=''>";
 
 		d+="<table><tr>";
@@ -102,7 +102,6 @@ app.v.init=function(){
 };
 
 app.v.icon=function(target,width){
-	app.m.text=$("input[type=text]").val().split("")[0];
 
 	var width=width || 144;
 	var height=width;
@@ -144,24 +143,47 @@ app.v.icon=function(target,width){
 	c=document.getElementById(id);
 	var ctx=c.getContext("2d");
 	
-	app.v.radial(ctx,width,height);
-	davis.maybe(1,3,function(){	
-		ctx.clearRect(0, 0, width, height);
-		app.v.textIcon(ctx,width,height);
-	})
-
-	//app.v.textIcon(ctx,width,height);
-	//app.v.bilateral(ctx,width,height);
-	//app.v.radial(ctx,width,height);
+  app.v.herald(ctx, width, height);
+	// app.v.radial(ctx,width,height);
 
 };
 
+app.v.herald = function (ctx, width, height) {
+  var numberOfSides = 3 + davis.random(3);
+	var lineWidth = davis.random(width/15);
+  var stroke = davis.randomColor('grey');
+
+  app.v.ngon({
+		n: numberOfSides,
+		gradient:true,
+    fill: 'transparent',
+		color: stroke,
+    context:ctx,
+		x:width/2,
+		y:height/3,
+		r:width / 10 + davis.random(width/4),
+		lineWidth: lineWidth
+	});	
+
+  app.v.ngon({
+		n: numberOfSides,
+		gradient:true,
+    fill: 'transparent',
+		color: stroke,
+    context:ctx,
+		x:width/2,
+		y: height / 2,
+		r: width/ 10 + davis.random(width/4),
+		lineWidth: lineWidth
+	});	
+
+};
 
 app.v.textIcon=function(ctx,width,height){ctx.beginPath();
 
 	var color=davis.randomColor();
 	var gradient=ctx.createLinearGradient(0,0,0,height);
-	gradient.addColorStop(0,color);
+  gradient.addColorStop(0,color);
 	gradient.addColorStop(1,davis.pick([color,davis.randomColor(),"#000","#fff",davis.alpha(color,0)]));
 	ctx.fillStyle=gradient;
 	ctx.fillRect(0,0,width,height);
@@ -374,7 +396,7 @@ app.v.ngon=function(c){
 	rotation=c.rotation || rotation;
 	var color=c.color || davis.randomColor("grey");
 	var lineWidth=c.lineWidth || 1;
-	var fill=c.fill || davis.randcomColor();
+	var fill=c.fill || davis.randomColor();
 	ctx.beginPath();
 	for (var i=0;i<n+2;i++){
 		var nx=geo.getPoint(x,y,r,rotation+(i*360/n)).x2;
@@ -401,7 +423,9 @@ app.v.style=function(){
 		"margin":"0px",
 		"padding":"0px",
 		"text-align":"center",
-		"background":"#ddd"
+		"background":"#fefefe",
+    "color": "#333",
+    "font-family": "sans-serif"
 	});
 	davis.style("canvas",{
 		"margin":"20px",
@@ -423,7 +447,7 @@ app.v.style=function(){
 		"width":"100%",
 		"margin":"0px",
 		"cursor":"pointer",
-		"background":"#EC1313",
+		"background":"#333333",
 		"color":"#fff"
 	});
 	davis.style("table",{
