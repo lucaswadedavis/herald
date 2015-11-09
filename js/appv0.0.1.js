@@ -35,7 +35,7 @@ app.c.listeners=function(){
 	});
 
 
-	$("input#clear").on("click",function(){
+	$("#clear").on("click",function(){
 		$("div#icons").html("");
 		for (var i=0;i<5;i++){
 			var iconWidth=$("input[name=size]:checked").val();
@@ -75,8 +75,12 @@ app.v.init=function(){
 	app.v.style();
 	var b=app.m.bounds;
 	var d="";
-  d+="<h1>Herald</h1>";
-	d+="<div id='radios'><form actio=''>";
+  d+="<div class='container'>";
+  d+="<div class='row'>"
+	d+="<div class='col-sm-12 col-md-6' id='icons'></div>";
+ 
+  d+="<div class='col-sm-12 col-md-6 header' ><h1>Herald</h1></div>";
+	d+="<div class='col-sm-12 col-md-6' id='radios'><form action=''>";
 
 		d+="<table><tr>";
 			d+="<td><input type='radio' name='size' value='1024'><br>1024</td>";
@@ -84,13 +88,19 @@ app.v.init=function(){
 			d+="<td><input type='radio' name='size' value='144' checked><br>144</td>";
 			d+="<td><input type='radio' name='size' value='72' ><br>72</td>";
 		d+="</tr></table>";
-	d+="</form></div>";
-	d+="<div id='icons'></div>";
-	d+="<div id='controlls'>";
-		d+="<input type='button' value='more' id='clear'></input>";
-	d+="</div>";
-	d+="<p>click the icons you save below for a png version</p>"
-	d+="<div id='saved'></div>";
+	d+="</form>";
+  
+	d+="<p>click the icons you save below for a png version</p>";
+  d+="</div>";
+
+  d+="</div>";
+  d+="<div class='row'>";
+		d+="<div class='col-sm-12' id='clear'>More</div>";
+  d+="</div>";
+  d+="<div class='row'>";
+  d+="<div class='col-sm-12' id='saved'></div>";
+  d+="</div>";
+  d+="</div>";
 	d+=davis.license();
 	$("body").html(d);
 	var iconWidth=$("input[name=size]:checked").val();
@@ -418,12 +428,15 @@ app.v.canvas=function(w,h,id){
 };
 
 app.v.style=function(){
+
+  var darkGrey = '#333333';
+  var lightGrey = '#777777';
+  var color1 = 'gold';
+  
 	davis.style("body",{
 		"width":"100%",
-		"margin":"0px",
-		"padding":"0px",
 		"text-align":"center",
-		"background":"#fefefe",
+		"background":lightGrey,
     "color": "#333",
     "font-family": "sans-serif"
 	});
@@ -431,21 +444,14 @@ app.v.style=function(){
 		"margin":"20px",
 		"cursor":"pointer"
 	});
-	davis.style("div",{
-		"text-align":"center",
-		"border":"1px solid #111",
-		"margin":"20px"
-	});
 	davis.style("input[type=text]",{
 		"font-size":"3em",
 		"color":"#111",
 		"text-align":"center",
 		"margin-top":"30px"
 	});
-	davis.style("input[type=button]",{
+	davis.style("#clear",{
 		"font-size":"3em",
-		"width":"100%",
-		"margin":"0px",
 		"cursor":"pointer",
 		"background":"#333333",
 		"color":"#fff"
@@ -464,5 +470,12 @@ app.v.style=function(){
 		"width":"100px",
 		"height":"100px"
 	});
-
+  davis.style('#icons', {
+    'background':'#ffffff',
+    'border':'1px solid '+darkGrey
+  });
+  davis.style('.header', {
+    'background':color1,
+    'color':'#ffffff'
+  });
 };
